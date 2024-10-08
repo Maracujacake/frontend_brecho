@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import RegisterProductPage from './pages/RegisterProduct';
+// Importe outras páginas e componentes
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/login" element={< LoginPage />} />
+                <Route path="/registrarProduto" element={< RegisterProductPage />} />
+                {/* Defina outras rotas aqui, usando o atributo 'element' */}
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;
