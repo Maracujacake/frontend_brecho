@@ -23,6 +23,14 @@ const HomePage = () => {
                     <Link to="/registrarProduto">Registrar Produto</Link>
                     <p>URL: <code>http://localhost:3000/registrarProduto</code></p>
                 </li>
+                <li>
+                    <Link to="/registrarCategoria">Registrar Categoria</Link>
+                    <p>URL: <code>http://localhost:3000/registrarCategoria</code></p>
+                </li>
+                <li>
+                    <Link to="/deleterCategoria">Deletar Categoria</Link>
+                    <p>URL: <code>http://localhost:3000/deleterCategoria</code></p>
+                </li>
                 {/* Adicione outras rotas de administrador aqui */}
             </ul>
 
@@ -43,6 +51,18 @@ const HomePage = () => {
             <li>
                 <Link to="/cliente/carrinho">Lista os produtos no carrinho do cliente</Link>
                 <p>URL: <code>http://localhost:3000/cliente/carrinho</code></p>
+            </li>
+            <li>
+                <Link to="/cliente/deletarCarrinho">Exclui o carrinho do cliente</Link>
+                <p>URL: <code>http://localhost:3000/cliente/deletarCarrinho</code></p>
+            </li>
+            <li>
+                <Link to="/cliente/removerProdutoCarrinho">Remove um produto do carrinho do cliente</Link>
+                <p>URL: <code>http://localhost:3000/cliente/removerProdutoCarrinho</code></p>
+            </li>
+            <li>
+                <Link to="/cliente/realizarPedido">Transforma um carrinho com itens em pedido</Link>
+                <p>URL: <code>http://localhost:3000/cliente/realizarPedido</code></p>
             </li>
 
             </ul>
