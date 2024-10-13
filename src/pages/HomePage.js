@@ -29,9 +29,21 @@ const HomePage = () => {
             <h3>Se você está logado como <strong>Usuário Comum</strong>, pode acessar as seguintes rotas:</h3>
             <ul>
             <li>
-                    <Link to="/cliente/perfil">Informações do Cliente</Link>
-                    <p>URL: <code>http://localhost:3000/cliente/perfil</code></p>
-                </li>
+                <Link to="/cliente/perfil">Informações do Cliente</Link>
+                <p>URL: <code>http://localhost:3000/cliente/perfil</code></p>
+            </li>
+            <li>
+                <Link to="/cliente/criarCarrinho">Cria carrinho do cliente</Link>
+                <p>URL: <code>http://localhost:3000/cliente/criarCarrinho</code></p>
+            </li>
+            <li>
+                <Link to="/cliente/adicionarProduto">Adiciona produto ao carrinho do cliente</Link>
+                <p>URL: <code>http://localhost:3000/cliente/adicionarProduto</code></p>
+            </li>
+            <li>
+                <Link to="/cliente/carrinho">Lista os produtos no carrinho do cliente</Link>
+                <p>URL: <code>http://localhost:3000/cliente/carrinho</code></p>
+            </li>
 
             </ul>
 
