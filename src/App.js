@@ -18,6 +18,7 @@ import RemoveProductFromCart from './components/RemoveProductFromCart';
 import FinalizeOrderPage from './pages/FinalizeOrderPage';
 import RegisterCategoryPage from './pages/RegisterCategoryPage';
 import DeleteCategoryPage from './pages/DeleteCategoryPage';
+import DeleteProduto from './components/DeleteProduto';
 // Importe outras páginas e componentes
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
 
                 {/* admin */}
                 <Route path="/registrarProduto" element={< RegisterProductPage />} />
+                <Route path="/deletarProduto" element={< DeleteProduto />} />
                 <Route path="/registrarCategoria" element={<RegisterCategoryPage />} />
                 <Route path="/deleterCategoria" element={<DeleteCategoryPage />} />
                 {/* Defina outras rotas aqui, usando o atributo 'element' */}

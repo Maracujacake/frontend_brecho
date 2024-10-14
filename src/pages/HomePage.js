@@ -24,6 +24,10 @@ const HomePage = () => {
                     <p>URL: <code>http://localhost:3000/registrarProduto</code></p>
                 </li>
                 <li>
+                    <Link to="/deletarProduto">Deletar Produto</Link>
+                    <p>URL: <code>http://localhost:3000/deletarProduto</code></p>
+                </li>
+                <li>
                     <Link to="/registrarCategoria">Registrar Categoria</Link>
                     <p>URL: <code>http://localhost:3000/registrarCategoria</code></p>
                 </li>
