@@ -28,7 +28,7 @@ const Navbar2 = () => {
                     </Link>
 
                     {/* Botão de login/perfil */}
-                    <Link to="#" className="hover:text-black">
+                    <Link to="/login" className="hover:text-black">
                         <FaUser size={20} />
                     </Link>
 

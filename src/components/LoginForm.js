@@ -1,14 +1,17 @@
 // src/components/LoginForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
+
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Previne o comportamento padrão do formulário
+        e.preventDefault();
 
         try {
             const response = await axios.post('http://localhost:8080/breshow/usuario/login', {
@@ -16,44 +19,47 @@ const LoginForm = () => {
                 password,
             });
 
-            // Armazena o token (ou faz algo com ele, como redirecionar)
             console.log('Token:', response.data);
-            localStorage.setItem('token', response.data); // Armazenando o token no localStorage
-            localStorage.setItem('email', email); // Armazenando o email no localStorage
-            localStorage.setItem('password', password); // Armazenando a senha no localStorage
-            // Redirecionar ou atualizar o estado global aqui se necessário
+            localStorage.setItem('token', response.data);
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
 
             alert('Login realizado com sucesso!');
+            navigate('/');
         } catch (err) {
             console.error('Erro ao fazer login:', err);
             alert('Erro ao fazer login. Verifique as credenciais e tente novamente.');
-            setError('Credenciais inválidas.'); // Mensagem de erro para o usuário
+            setError('Credenciais inválidas.');
         }
     };
 
     return (
-        <form onSubmit={handleLogin}>
-            <h2>Login</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div>
-                <label>Email:</label>
+        <form onSubmit={handleLogin} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+            <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Login</h2>
+            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+            <div className="mb-4">
+                <label className="block text-gray-700 font-medium mb-2">Email:</label>
                 <input 
                     type="text" 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} 
                     required 
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                 />
             </div>
-            <div>
-                <label>Senha:</label>
+            <div className="mb-6">
+                <label className="block text-gray-700 font-medium mb-2">Senha:</label>
                 <input 
-                    type="text" 
+                    type="password" 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     required 
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                 />
             </div>
-            <button type="submit">Entrar</button>
+            <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
+                Entrar
+            </button>
         </form>
     );
 };

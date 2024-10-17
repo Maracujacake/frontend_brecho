@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterProductPage from './pages/RegisterProduct';
-import HomePage from './pages/HomePage';
+import HomePageRotas from './pages/HomePageRotas';
 import ProdutosPage from './pages/ProdutosPage';
 import ProdutosByCategoriaPage from './pages/ProdutosByCategoriaPage';
 import ProdutosBySkuPage from './pages/ProdutosBySkuPage';
@@ -21,7 +21,7 @@ import DeleteCategoryPage from './pages/DeleteCategoryPage';
 import DeleteProduto from './components/DeleteProduto';
 import Navbar1 from './components/home/navbar1';
 import Navbar2 from './components/home/navbar2';
-import Banner from './components/home/banner';
+import HomePage from './pages/HomePage';
 // Importe outras páginas e componentes
 
 const App = () => {
@@ -29,9 +29,12 @@ const App = () => {
         <Router>
             <Navbar1 />
             <Navbar2 />
-            <Banner />
             <Routes>
-                <Route path="/rotas" element={< HomePage />} />
+
+                <Route path="/" element={< HomePage />} />
+
+
+                <Route path="/rotas" element={< HomePageRotas />} />
                 <Route path="/login" element={< LoginPage />} />
                 
                 <Route path="/produtos" element={< ProdutosPage />} />
