@@ -19,13 +19,19 @@ import FinalizeOrderPage from './pages/FinalizeOrderPage';
 import RegisterCategoryPage from './pages/RegisterCategoryPage';
 import DeleteCategoryPage from './pages/DeleteCategoryPage';
 import DeleteProduto from './components/DeleteProduto';
+import Navbar1 from './components/home/navbar1';
+import Navbar2 from './components/home/navbar2';
+import Banner from './components/home/banner';
 // Importe outras páginas e componentes
 
 const App = () => {
     return (
         <Router>
+            <Navbar1 />
+            <Navbar2 />
+            <Banner />
             <Routes>
-                <Route path="/" element={< HomePage />} />
+                <Route path="/rotas" element={< HomePage />} />
                 <Route path="/login" element={< LoginPage />} />
                 
                 <Route path="/produtos" element={< ProdutosPage />} />
