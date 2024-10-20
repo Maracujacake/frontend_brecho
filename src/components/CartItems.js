@@ -1,10 +1,12 @@
 // src/components/CartItems.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CartItems = () => {
     const [items, setItems] = useState([]);
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // Usando o hook useNavigate para redirecionamento
 
     useEffect(() => {
         const fetchCartItems = async () => {
@@ -29,11 +31,13 @@ const CartItems = () => {
             } catch (err) {
                 console.error('Erro ao carregar itens do carrinho:', err);
                 setError('Erro ao carregar os itens do carrinho. Por favor, tente novamente.');
+                alert('Uma solução para o erro é criar o carrinho caso não tenha criado ainda.'); // Alerta de erro
+                navigate('/cliente/criarCarrinho'); // Redireciona para a página de criar carrinho
             }
         };
 
         fetchCartItems();
-    }, []);
+    }, [navigate]); // Incluindo navigate como dependência
 
     return (
         <div>
