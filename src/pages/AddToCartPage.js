@@ -1,8 +1,8 @@
 // src/pages/LoginPage.js
 import React from 'react';
-import AddToCart from '../components/addProdutoCarrinho';
+import AddToCart from '../components/AddToCart';
 
-const addProdutoCarrinho = () => {
+const AddToCartPage = () => {
     return (
         <div>
             <AddToCart />
@@ -10,4 +10,4 @@ const addProdutoCarrinho = () => {
     );
 };
 
-export default addProdutoCarrinho;
+export default AddToCartPage;

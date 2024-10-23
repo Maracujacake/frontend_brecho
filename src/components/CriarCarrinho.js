@@ -1,14 +1,20 @@
-// src/components/CreateCart.js
+/* 
+    Este componente é responsável por criar um carrinho de compras no sistema.
+    O cliente, estando logado, deve criar um carrinho para poder adicionar produtos.
+    O carrinho é destruído ao final da compra
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import { getAuthCredentials } from './shared/getAuthCredentials';
 
 const CreateCart = () => {
     const [cart, setCart] = useState(null);
     const [error, setError] = useState('');
 
     const handleCreateCart = async () => {
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
+        const { email, password } = getAuthCredentials();
 
         if (!email || !password) {
             setError('Você precisa estar logado para criar um carrinho.');
@@ -18,8 +24,8 @@ const CreateCart = () => {
         try {
             // Enviando a requisição para criar o carrinho
             const response = await axios.post(
-                'http://localhost:8080/breshow/carrinho/criar',
-                {}, // Nenhum dado extra é necessário, apenas autenticação
+                `${API_BASE_URL}/carrinho/criar`,
+                {},
                 {
                     auth: {
                         username: email,

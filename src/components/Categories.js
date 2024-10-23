@@ -1,8 +1,12 @@
-// src/components/Categorias.js
+/*
+    Esse componente exibe a lista de categorias disponíveis no sistema
+*/
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import ErrorMessage from './shared/ErrorMessage';
 
-const Categorias = () => {
+const Categories = () => {
     // Estado para armazenar as categorias
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
@@ -10,7 +14,7 @@ const Categorias = () => {
     // Função para buscar todas as categorias da API
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/breshow/categoria/all');
+            const response = await axios.get(`${API_BASE_URL}/categoria/all`);
             setCategories(response.data); // Atualiza o estado com as categorias recebidas
             setError(''); // Limpa possíveis erros anteriores
         } catch (err) {
@@ -27,7 +31,7 @@ const Categorias = () => {
     return (
         <div>
             <h2>Lista de Categorias</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <ErrorMessage message={error} />}
             <ul>
                 {categories.map((category) => (
                     <li key={category.id}>{category.nome}</li> // Exibe o nome de cada categoria
@@ -37,4 +41,4 @@ const Categorias = () => {
     );
 };
 
-export default Categorias;
+export default Categories;

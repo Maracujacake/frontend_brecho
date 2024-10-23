@@ -1,8 +1,8 @@
 // src/pages/ProdutosPage.js
 import React from 'react';
-import ProductList from '../components/ListagemProdutos';
+import ProductList from '../components/ProductList';
 
-const ProdutosPage = () => {
+const ProductListPage = () => {
     return (
         <div>
             <ProductList />
@@ -10,4 +10,4 @@ const ProdutosPage = () => {
     );
 };
 
-export default ProdutosPage;
+export default ProductListPage;
