@@ -1,6 +1,12 @@
-// src/components/RegisterCustomerForm.js
+/* 
+    Este componente é responsável por exibir um formulário para registrar um novo cliente.
+    Não é necessário permissão para registrar um novo cliente.
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import ErrorMessage from './shared/ErrorMessage';
 
 const RegistrarClienteForm = () => {
     // Estados para armazenar os dados do formulário
@@ -27,7 +33,7 @@ const RegistrarClienteForm = () => {
 
         try {
             // Fazer a requisição POST para registrar o cliente
-            const response = await axios.post('http://localhost:8080/breshow/cliente/register', newCustomer, {
+            const response = await axios.post(`${API_BASE_URL}/cliente/register`, newCustomer, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -47,7 +53,7 @@ const RegistrarClienteForm = () => {
     return (
         <form onSubmit={handleRegisterCustomer}>
             <h2>Registrar Cliente</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <ErrorMessage message={error} />
             {success && <p style={{ color: 'green' }}>{success}</p>}
 
             <div>

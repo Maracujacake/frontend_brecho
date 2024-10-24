@@ -10,7 +10,7 @@ import ProdutosBySkuPage from './pages/ProdutosBySkuPage';
 import RegistrarClientePage from './pages/RegistrarClientePage';
 import CategoriesPage from './pages/CategoriesPage';
 import PerfilUsuarioPage from './pages/PerfilUsuarioPage';
-import CriarCarrinhoPage from './pages/CriarCarrinhoPage';
+import CreateCartPage from './pages/CreateCartPage';
 import AddToCartPage from './pages/AddToCartPage';
 import CartItemsPage from './pages/CartItemsPage';
 import DeleteCartPage from './pages/DeleteCartPage';
@@ -18,7 +18,7 @@ import RemoveProductFromCart from './components/RemoveProductFromCart';
 import FinalizeOrderPage from './pages/FinalizeOrderPage';
 import RegisterCategoryPage from './pages/RegisterCategoryPage';
 import DeleteCategoryPage from './pages/DeleteCategoryPage';
-import DeleteProduto from './components/DeleteProduto';
+import DeleteProduct from './components/DeleteProduct';
 import Navbar1 from './components/home/navbar1';
 import Navbar2 from './components/home/navbar2';
 import HomePage from './pages/HomePage';
@@ -46,7 +46,7 @@ const App = () => {
                 {/* cliente*/}
                 <Route path="/cliente/registrar" element={<RegistrarClientePage />} />
                 <Route path="/cliente/perfil" element={<PerfilUsuarioPage />} />
-                <Route path="/cliente/criarCarrinho" element={<CriarCarrinhoPage />} />
+                <Route path="/cliente/criarCarrinho" element={<CreateCartPage />} />
                 <Route path="/cliente/adicionarProduto" element={<AddToCartPage />} />
                 <Route path="/cliente/carrinho" element={<CartItemsPage />} />
                 <Route path="/cliente/deletarCarrinho" element={<DeleteCartPage />} />
@@ -56,7 +56,7 @@ const App = () => {
 
                 {/* admin */}
                 <Route path="/registrarProduto" element={< RegisterProductPage />} />
-                <Route path="/deletarProduto" element={< DeleteProduto />} />
+                <Route path="/deletarProduto" element={< DeleteProduct />} />
                 <Route path="/registrarCategoria" element={<RegisterCategoryPage />} />
                 <Route path="/deleterCategoria" element={<DeleteCategoryPage />} />
                 {/* Defina outras rotas aqui, usando o atributo 'element' */}

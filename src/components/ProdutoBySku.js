@@ -1,6 +1,15 @@
-// src/components/ProdutoBySKU.js
+/* 
+    Componente para buscar um produto pelo SKU, provavelmente utilizado pelos administradores do sistema e
+    atendententes para verificar informações de um produto específico.
+
+    - "Talvez seja interessante adicionar um botão para deletar/alterar o produto, caso o usuário tenha permissão."
+    - "Talvez seja interessante adicionar uma rota similar à esta para buscar um produto pelo nome."
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import ErrorMessage from './shared/ErrorMessage';
 
 const ProductBySKU = () => {
     const [sku, setSku] = useState(''); // Estado para armazenar o SKU
@@ -10,7 +19,7 @@ const ProductBySKU = () => {
     // Função para buscar produto pelo SKU
     const fetchProductBySKU = async (sku) => {
         try {
-            const response = await axios.get(`http://localhost:8080/breshow/produto/${sku}`);
+            const response = await axios.get(`${API_BASE_URL}/produto/${sku}`);
             setProduct(response.data); // Atualiza o estado com o produto recebido
             setError(''); // Limpa erros, se houver
         } catch (err) {
@@ -32,7 +41,7 @@ const ProductBySKU = () => {
     return (
         <div>
             <h1>Buscar Produto por SKU</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <ErrorMessage message={error} />
 
             <form onSubmit={handleSubmit}>
                 <div>

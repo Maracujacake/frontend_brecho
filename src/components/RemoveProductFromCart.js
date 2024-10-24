@@ -1,6 +1,15 @@
-// src/components/RemoveProductFromCart.js
+/* 
+    Este componente é responsável por remover um produto do carrinho de compras. O cliente,
+    estando logado, deve informar o SKU do produto que deseja remover e a quantidade.
+
+    TO-DO: checar se a quantidade informada é válida.
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import { getAuthCredentials } from './shared/getAuthCredentials';
+import ErrorMessage from './shared/ErrorMessage';
 
 const RemoveProductFromCart = () => {
     const [sku, setSku] = useState('');
@@ -11,8 +20,7 @@ const RemoveProductFromCart = () => {
     const handleRemoveProduct = async (e) => {
         e.preventDefault(); // Previne o comportamento padrão do formulário
 
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
+        const {email, password} = getAuthCredentials();
 
         if (!email || !password) {
             setError('Você precisa estar logado para remover produtos do carrinho.');
@@ -20,7 +28,7 @@ const RemoveProductFromCart = () => {
         }
 
         try {
-            const response = await axios.delete(`http://localhost:8080/breshow/carrinho/remover/${sku}`, {
+            const response = await axios.delete(`${API_BASE_URL}/carrinho/remover/${sku}`, {
                 params: { quantidade },
                 auth: {
                     username: email,
@@ -42,7 +50,7 @@ const RemoveProductFromCart = () => {
     return (
         <div>
             <h2>Remover Produto do Carrinho</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <ErrorMessage message={error} />
             {message && <p style={{ color: 'green' }}>{message}</p>}
             <form onSubmit={handleRemoveProduct}>
                 <div>

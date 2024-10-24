@@ -1,7 +1,13 @@
-// src/components/LoginForm.js
+/*  
+    Componente de formulário de login, caso o usuário esteja logado, exibe um botão para logout.
+    Caso contrário, exibe um formulário para login.
+*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
+import { API_BASE_URL } from '../utils/apiConfig';
+import { getAuthCredentials } from './shared/getAuthCredentials';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -12,10 +18,9 @@ const LoginForm = () => {
 
     // Verifica se o usuário está logado
     useEffect(() => {
-        const storedEmail = localStorage.getItem('email');
-        const storedPassword = localStorage.getItem('password');
+        const {email, password} = getAuthCredentials();
 
-        if (storedEmail && storedPassword) {
+        if (email && password) {
             setIsLoggedIn(true);
         }
     }, []);
@@ -24,7 +29,7 @@ const LoginForm = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/breshow/usuario/login', {
+            const response = await axios.post(`${API_BASE_URL}/usuario/login`, {
                 email,
                 password,
             });

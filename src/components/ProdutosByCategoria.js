@@ -1,7 +1,13 @@
-// src/components/ProdutosByCategoria.js
+/*
+    Este componente exibe uma lista de produtos de acordo com a categoria informada.
+    Ele exibe um formulário para o usuário informar a categoria desejada e exibe os produtos correspondentes.
+*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../utils/apiConfig';
+import ErrorMessage from './shared/ErrorMessage';
 
 const ProdutosByCategoria = () => {
     const { categoria } = useParams(); // Pega a categoria da URL, se houver
@@ -15,7 +21,7 @@ const ProdutosByCategoria = () => {
     const fetchProductsByCategory = async (categoryToFetch) => {
         setLoading(true); // Inicia o carregamento
         try {
-            const response = await axios.get(`http://localhost:8080/breshow/produto/categoria/${categoryToFetch}`);
+            const response = await axios.get(`${API_BASE_URL}/produto/categoria/${categoryToFetch}`);
             setProducts(response.data); // Atualiza o estado com os produtos recebidos
             setError(''); // Limpa erros, se houver
         } catch (err) {
@@ -46,7 +52,7 @@ const ProdutosByCategoria = () => {
     return (
         <div>
             <h1>Produtos por Categoria</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <ErrorMessage message={error} />
 
             {/* Formulário para buscar produtos pela categoria */}
             {!categoria && ( // Exibe o formulário apenas se a categoria não vier da URL

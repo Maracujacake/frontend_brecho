@@ -1,14 +1,22 @@
-// src/components/FinalizeOrder.js
+/* 
+    Este componente é responsável por finalizar/confirmar o pedido do usuário, que estava até agora
+    com produtos no carrinho.
+    Ele exibe um botão que, ao ser clicado, finaliza o pedido do usuário.
+    Após finalizar o pedido, o carrinho é deletado.
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import { getAuthCredentials } from './shared/getAuthCredentials';
+import ErrorMessage from './shared/ErrorMessage';
 
 const FinalizeOrder = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
     const handleFinalizeOrder = async () => {
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
+        const { email, password } = getAuthCredentials();
 
         if (!email || !password) {
             setError('Você precisa estar logado para finalizar o pedido.');
@@ -16,7 +24,7 @@ const FinalizeOrder = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/breshow/carrinho/finalizar', {}, {
+            const response = await axios.post(`${API_BASE_URL}/carrinho/finalizar`, {}, {
                 auth: {
                     username: email,
                     password: password,
@@ -35,7 +43,7 @@ const FinalizeOrder = () => {
     return (
         <div>
             <h2>Finalizar Pedido</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <ErrorMessage message={error} />}
             {message && <p style={{ color: 'green' }}>{message}</p>}
             <button onClick={handleFinalizeOrder}>Finalizar Pedido</button>
         </div>

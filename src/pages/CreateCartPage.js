@@ -1,8 +1,8 @@
 // src/pages/CriarCarrinhoPage.js
 import React from 'react';
-import CreateCart from '../components/CriarCarrinho';
+import CreateCart from '../components/CreateCart';
 
-const CriarCarrinhoPage = () => {
+const CreateCartPage = () => {
     return (
         <div>
             <CreateCart />
@@ -10,4 +10,4 @@ const CriarCarrinhoPage = () => {
     );
 };
 
-export default CriarCarrinhoPage;
+export default CreateCartPage;

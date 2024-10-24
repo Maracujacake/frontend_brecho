@@ -1,6 +1,13 @@
-// src/components/RegisterProductForm.js
+/* 
+    Esses componente é responsável por registrar um novo produto no sistema. Pode associar 
+    o produto a uma ou mais categorias. O usuário precisa estar logado como ADMIN para registrar um produto.
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import { getAuthCredentials } from './shared/getAuthCredentials';
+import ErrorMessage from './shared/ErrorMessage';
 
 const RegisterProductForm = () => {
     const [sku, setSku] = useState('');
@@ -15,8 +22,7 @@ const RegisterProductForm = () => {
         e.preventDefault(); // Previne o comportamento padrão do formulário
 
         // Pegar o email e senha do localStorage para autenticação HTTP Basic
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
+        const {email, password} = getAuthCredentials();
 
         if (!email || !password) {
             setError('Você precisa estar logado como ADMIN para registrar um produto.');
@@ -35,7 +41,7 @@ const RegisterProductForm = () => {
 
         try {
             // Fazer a requisição POST com autenticação Basic
-            const response = await axios.post('http://localhost:8080/breshow/produto/registrar', newProduct, {
+            const response = await axios.post(`${API_BASE_URL}/produto/registrar`, newProduct, {
                 auth: {
                     username: email,
                     password: password,
@@ -59,7 +65,7 @@ const RegisterProductForm = () => {
     return (
         <form onSubmit={handleRegisterProduct}>
             <h2>Registrar Produto</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <ErrorMessage message={error} />
             {success && <p style={{ color: 'green' }}>{success}</p>}
 
             <div>

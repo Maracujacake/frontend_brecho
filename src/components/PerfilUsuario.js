@@ -1,5 +1,14 @@
+/*
+    Este componente é responsável por exibir os dados do usuário logado.
+    Caso o usuário não esteja logado, ele exibe uma mensagem de erro.
+    Talvez uma boa ideia seja redirecionar o usuário para a página de login.
+*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import { getAuthCredentials } from './shared/getAuthCredentials';
+import ErrorMessage from './shared/ErrorMessage';
 
 const PerfilUsuario = () => {
     const [userData, setUserData] = useState(null);
@@ -7,8 +16,7 @@ const PerfilUsuario = () => {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const email = localStorage.getItem('email');
-            const password = localStorage.getItem('password');
+            const {email, password} = getAuthCredentials();
 
             if (!email || !password) {
                 setError('Nenhuma credencial encontrada. Por favor, faça o login.');
@@ -17,7 +25,7 @@ const PerfilUsuario = () => {
 
             try {
                 // Realizando a requisição com autenticação básica usando email e password do localStorage
-                const response = await axios.get('http://localhost:8080/breshow/cliente/me', {
+                const response = await axios.get(`${API_BASE_URL}/cliente/me`, {
                     auth: {
                         username: email,
                         password: password,
@@ -38,7 +46,7 @@ const PerfilUsuario = () => {
     return (
         <div>
             <h2>Perfil do Usuário</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <ErrorMessage message={error} />}
             {userData ? (
                 <div>
                     <p>ID: {userData.id}</p>

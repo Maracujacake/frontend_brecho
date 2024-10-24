@@ -1,6 +1,15 @@
-// src/components/RegisterCategory.js
+/* 
+    Este componente é responsável por exibir um formulário para o usuário registrar uma nova categoria
+    caso tenha permissão.
+
+    Ele exibe um campo de texto para o usuário digitar o nome da categoria e um botão para registrar a categoria.
+    Ao criar um novo produto, o usuário vai poder informar a nova categoria criada.
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import ErrorMessage from './shared/ErrorMessage';
 
 const RegisterCategory = () => {
     const [categoryName, setCategoryName] = useState('');
@@ -19,7 +28,7 @@ const RegisterCategory = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/breshow/categoria/register', 
+            const response = await axios.post(`${API_BASE_URL}/categoria/register`, 
                 { nome: categoryName }, // Corpo da requisição com o nome da categoria
                 {
                     auth: {
@@ -54,7 +63,7 @@ const RegisterCategory = () => {
                 </div>
                 <button type="submit">Registrar Categoria</button>
             </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <ErrorMessage message={error} />
             {message && <p style={{ color: 'green' }}>{message}</p>}
         </div>
     );

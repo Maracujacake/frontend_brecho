@@ -1,6 +1,13 @@
-// src/components/DeleteCategory.js
+/* 
+    Este componente é responsável por deletar uma categoria do banco de dados.
+    Utilizar com cuidado pois podem haver produtos associados a essa categoria.
+    Tentar deletar uma categoria com produtos associados pode resultar em erro.
+*/
 import React, { useState } from 'react';
 import axios from 'axios';
+import { getAuthCredentials } from './shared/getAuthCredentials';
+import { API_BASE_URL } from '../utils/apiConfig';
+import ErrorMessage from './shared/ErrorMessage';
 
 const DeleteCategory = () => {
     const [categoryId, setCategoryId] = useState('');
@@ -10,8 +17,7 @@ const DeleteCategory = () => {
     const handleDeleteCategory = async (e) => {
         e.preventDefault(); // Previne o comportamento padrão do formulário
 
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
+        const { email, password } = getAuthCredentials();
 
         if (!email || !password) {
             setError('Você precisa estar logado como administrador para deletar uma categoria.');
@@ -20,7 +26,7 @@ const DeleteCategory = () => {
 
         try {
             // Formando a URL corretamente
-            await axios.delete(`http://localhost:8080/breshow/categoria/delete/{id}?id=${categoryId}`, {
+            await axios.delete(`${API_BASE_URL}/categoria/delete/{id}?id=${categoryId}`, {
                 auth: {
                     username: email,
                     password: password,
@@ -52,7 +58,7 @@ const DeleteCategory = () => {
                 </div>
                 <button type="submit">Deletar Categoria</button>
             </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <ErrorMessage message={error} />}
             {message && <p style={{ color: 'green' }}>{message}</p>}
         </div>
     );

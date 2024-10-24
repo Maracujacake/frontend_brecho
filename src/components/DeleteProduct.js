@@ -1,8 +1,15 @@
-// src/components/DeleteProduto.js
+/* 
+    Esse componente permite deletar um produto do sistema através do SKU (código único).
+    Ele exibe um formulário onde o usuário pode inserir o SKU do produto que deseja deletar.
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/apiConfig';
+import { getAuthCredentials } from './shared/getAuthCredentials';
+import ErrorMessage from './shared/ErrorMessage';
 
-const DeleteProduto = () => {
+const DeleteProduct = () => {
     const [sku, setSku] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
@@ -10,8 +17,7 @@ const DeleteProduto = () => {
     const handleDelete = async (e) => {
         e.preventDefault();
 
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
+        const { email, password } = getAuthCredentials();
 
         if (!email || !password) {
             setError('Você precisa estar logado como administrador para deletar uma categoria.');
@@ -20,7 +26,7 @@ const DeleteProduto = () => {
 
         try {
             // Formando a URL corretamente
-            const response = await axios.delete(`http://localhost:8080/breshow/produto/delete/${sku}`, {
+            const response = await axios.delete(`${API_BASE_URL}/produto/delete/${sku}`, {
                 auth: {
                     username: email,
                     password: password,
@@ -53,8 +59,9 @@ const DeleteProduto = () => {
                 <button type="submit">Deletar Produto</button>
             </form>
             {message && <p>{message}</p>}
+            {error && <ErrorMessage message={error} />}
         </div>
     );
 };
 
-export default DeleteProduto;
+export default DeleteProduct;
